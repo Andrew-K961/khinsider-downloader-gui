@@ -27,6 +27,14 @@ const createWindow = () => {
         console.log(message);
         win.webContents.send('receiveUpdate', JSON.stringify(message));
     });
+
+    let shell = require('electron').shell
+    win.webContents.on('will-navigate', function (e, url) {
+        if (url != win.webContents.getURL()) {
+          e.preventDefault()
+          shell.openExternal(url)
+        }
+      });
 }
 
 app.whenReady().then(() => {
