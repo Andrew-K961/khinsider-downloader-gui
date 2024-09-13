@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>khinsider Downloader GUI</title>
+</head>
+
+<body>
+    <h1>Welcome to khinsider Downloader GUI</h1>
+    <form>
+        <label for="khlink">khinisider link:</label>
+        <input type="text" id="khlink" name="khlink"><br><br>
+        <label for="downloadDir">Download Directory:</label>
+        <div id="form_inline">
+        <input type="text" id="downloadDir" name="downloadDir">
+        <button id="folderSelectBtn">Choose folder</button>
+        </div><br><br>
+        <input type="submit" id="loadBtn" value="Load">
+    </form>
+    <p id="status">Status: Select download folder and khinisider album</p>
+
+    <hr>
+    <div id="trackList">
+    </div>
+    <hr>
+
+    <button id="downloadBtn">Download</button>
+
+    <script src="./renderer.js"></script>
+</body>
+
+</html>

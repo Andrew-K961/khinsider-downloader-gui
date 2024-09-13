@@ -1,0 +1,19 @@
+{
+  "name": "kh-downloader-project",
+  "version": "1.0.0",
+  "description": "experimental project to add GUI to a khinsider downloader",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ASK",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^32.0.2",
+    "globals": "^15.9.0"
+  },
+  "dependencies": {
+    "python-shell": "^5.0.0"
+  }
+}
