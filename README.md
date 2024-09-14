@@ -9,7 +9,7 @@ Wrapper for https://github.com/trash/khinsider-mp3-downloader/pull/9/files writt
 ![screenshot](khd.png)
 
 ## Build
-**Requirements:** Python3, npm
+**Requirements:** Python3, NodeJS
 
 **Dependecies:**
 
