@@ -1,19 +1,31 @@
 {
   "name": "kh-downloader-project",
+  "productName": "khinsider Downloader GUI",
   "version": "1.0.0",
   "description": "experimental project to add GUI to a khinsider downloader",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "ASK",
   "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "electron": "^32.0.2",
     "globals": "^15.9.0"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
     "python-shell": "^5.0.0"
   }
 }

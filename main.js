@@ -1,10 +1,27 @@
 const { ipcMain } = require('electron')
 const { app, BrowserWindow, dialog } = require('electron/main')
 const path = require('node:path')
-const {PythonShell} = require('python-shell')
+const { PythonShell } = require('python-shell')
+const fs = require("fs");
 
-let urlIndexer = new PythonShell('./indexer.py', {mode: 'json'});
-let downloader = new PythonShell('./downloader.py', {mode: 'json'});
+let urlIndexer = new PythonShell('./indexer.py', { mode: 'json'});
+let downloader = new PythonShell('./downloader.py', { mode: 'json'});
+
+// Used this: https://til.simonwillison.net/electron/python-inside-electron but with hood tech workarounds
+function findPython() {
+    const possibilities = [
+        // In packaged app
+        path.join(process.resourcesPath, "python", "python.exe"),
+        // In development
+        path.join(__dirname, "python", "python.exe"),
+    ];
+    for (const path of possibilities) {
+        if (fs.existsSync(path)) {
+            return path;
+        }
+    }
+    return 'python';
+}
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -31,10 +48,10 @@ const createWindow = () => {
     let shell = require('electron').shell
     win.webContents.on('will-navigate', function (e, url) {
         if (url != win.webContents.getURL()) {
-          e.preventDefault()
-          shell.openExternal(url)
+            e.preventDefault()
+            shell.openExternal(url)
         }
-      });
+    });
 }
 
 app.whenReady().then(() => {
@@ -57,20 +74,20 @@ app.on('window-all-closed', () => {
     }
 })
 
-async function handleFileOpen () {
+async function handleFileOpen() {
     const { canceled, filePaths } = await dialog.showOpenDialog({
         properties: ['openDirectory']
     })
     if (!canceled) {
-      return filePaths[0]
+        return filePaths[0]
     }
 }
 
-function runDownloader (_event, downloadInput) {
+function runDownloader(_event, downloadInput) {
     //PythonShell.run('downloader.py', {mode: 'json', args: jsonOut})
     downloader.send(JSON.parse(downloadInput));
 }
 
-function runUrlIndexer (_event, urlInput) {
+function runUrlIndexer(_event, urlInput) {
     urlIndexer.send({ input: urlInput });
 }
