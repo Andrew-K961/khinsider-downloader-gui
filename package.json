@@ -5,7 +5,8 @@
   "description": "experimental project to add GUI to a khinsider downloader",
   "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "startDefault": "electron .",
+    "startForge": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make"
