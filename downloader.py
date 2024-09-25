@@ -43,6 +43,14 @@ def fetch_from_url(args):
 
     time.sleep(0.5)
 
+    if (not os.path.exists(dir_name)):
+        try:
+            os.makedirs(dir_name)
+        except:
+            jsonOutput['state'] = 2
+            printOutput('Error creating directory. Download aborted.')
+            return
+
     # http://stackoverflow.com/questions/22676/how-do-i-download-a-file-over-http-using-python
     # Iterate through links, grab the mp3s, and download them
     for href, song_name in song_map.items():

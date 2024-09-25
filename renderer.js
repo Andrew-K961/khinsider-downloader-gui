@@ -57,6 +57,7 @@ downloadBtn.addEventListener('click', (_event) => {
     }
     
     loadBtn.disabled = true;
+    downloadBtn.disabled = true;
 
     jsonOut = JSON.parse(JSON.stringify(loadResult));
     inputs = document.getElementsByClassName('check');
@@ -83,6 +84,7 @@ window.API.receiveUpdate((jsonResponse) => {
         loadBtn.disabled = true;
     } else {
         loadBtn.disabled = false;
+        downloadBtn.disabled = false;
         trackList.innerHTML = '';
     }
 
