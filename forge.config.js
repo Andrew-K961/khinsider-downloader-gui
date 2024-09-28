@@ -1,9 +1,21 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
+let pythonPath = 'win32';
+
 module.exports = {
+  hooks: {
+    prePackage: async (forgeConfig, platform, arch) => {
+      pythonPath = './' + platform;
+      console.log(pythonPath, '<---------------ALERT--------------------');
+    }
+  },
   packagerConfig: {
     asar: true,
+    beforeCopyExtraResources: async () => {
+      //pythonPath = './' + process.platform;
+    },
+    extraResource: [pythonPath, './indexer.py', './downloader.py']
   },
   rebuildConfig: {},
   makers: [

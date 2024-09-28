@@ -4,16 +4,16 @@ const path = require('node:path')
 const { PythonShell } = require('python-shell')
 const fs = require("fs");
 
-let urlIndexer = new PythonShell('./indexer.py', { mode: 'json'});
-let downloader = new PythonShell('./downloader.py', { mode: 'json'});
+let urlIndexer = new PythonShell(findIndexer(), { mode: 'json', pythonPath: findPython()});
+let downloader = new PythonShell(findDownloader(), { mode: 'json', pythonPath: findPython()});
 
 // Used this: https://til.simonwillison.net/electron/python-inside-electron but with hood tech workarounds
 function findPython() {
     const possibilities = [
         // In packaged app
-        path.join(process.resourcesPath, "python", "python.exe"),
+        path.join(process.resourcesPath, process.platform, "python", "python.exe"),
         // In development
-        path.join(__dirname, "python", "python.exe"),
+        path.join('win32', "python", "python.exe"),
     ];
     for (const path of possibilities) {
         if (fs.existsSync(path)) {
@@ -21,6 +21,36 @@ function findPython() {
         }
     }
     return 'python';
+}
+
+function findIndexer() {
+    const possibilities = [
+        // In packaged app
+        path.join(process.resourcesPath, 'indexer.py'),
+        // In development
+        './indexer.py'
+    ];
+    for (const path of possibilities) {
+        if (fs.existsSync(path)) {
+            return path;
+        }
+    }
+    throw new Error('script not found');
+}
+
+function findDownloader() {
+    const possibilities = [
+        // In packaged app
+        path.join(process.resourcesPath, 'downloader.py'),
+        // In development
+        './downloader.py'
+    ];
+    for (const path of possibilities) {
+        if (fs.existsSync(path)) {
+            return path;
+        }
+    }
+    throw new Error('script not found');
 }
 
 const createWindow = () => {

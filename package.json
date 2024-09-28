@@ -1,7 +1,7 @@
 {
   "name": "kh-downloader-project",
   "productName": "khinsider Downloader GUI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "experimental project to add GUI to a khinsider downloader",
   "main": "main.js",
   "scripts": {
